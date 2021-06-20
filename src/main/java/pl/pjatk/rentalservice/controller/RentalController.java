@@ -1,5 +1,6 @@
 package pl.pjatk.rentalservice.controller;
 
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.pjatk.rentalservice.model.Movie;
@@ -16,12 +17,19 @@ public class RentalController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
+    public ResponseEntity<Movie> getMovie(
+            @ApiParam(name = "id",
+            type = "long",
+            value = "1",
+            example = "1",
+            required = true,
+            defaultValue = "1") @PathVariable Long id) {
         return ResponseEntity.ok(rentalService.findById(id));
     }
 
     @PutMapping("/{id}/true")
-    public ResponseEntity<Movie> returnMovie(@PathVariable Long id) {
+    public ResponseEntity<Movie> returnMovie(
+            @PathVariable Long id) {
         return ResponseEntity.ok(rentalService.returnMovie(id));
     }
 
